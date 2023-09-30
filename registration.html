@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a17f9c; /* Updated background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        
+
+        .container {
+            background-color: #5397aa;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 30px;
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #6d0c6a;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select,
+        input[type="checkbox"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #982929;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #040f1b;
+        }
+<hr>
+        #output {
+            margin-top: 20px;
+            background-color: #e9e9e9;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        #submittedData {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <label>Skills:</label>
+            <label><input type="checkbox" name="skills" value="html"> HTML</label>
+            <label><input type="checkbox" name="skills" value="css"> CSS</label>
+            <label><input type="checkbox" name="skills" value="javascript"> JavaScript</label>
+            <input type="submit" value="Submit">
+        </form>
+        <div id="output">
+            <h3>Registration Data:</h3>
+            <div id="submittedData"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registrationForm');
+        const output = document.getElementById('output');
+        const submittedData = document.getElementById('submittedData');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const gender = document.getElementById('gender').value;
+            const skills = Array.from(document.querySelectorAll('input[name="skills"]:checked')).map(skill => skill.value).join(', ');
+
+            const userData = `
+                <p><strong>Full Name:</strong> ${fullName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Password:</strong> ${password}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Skills:</strong> ${skills}</p>
+            `;
+
+            submittedData.innerHTML = userData;
+            output.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
